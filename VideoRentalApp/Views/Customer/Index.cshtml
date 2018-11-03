@@ -1,0 +1,70 @@
+﻿@using System.Web.UI.WebControls
+@using VideoRentalAPP.Models
+@model IEnumerable<VideoRentalAPP.Models.Customer>
+
+@{
+    ViewBag.Title = "Customers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!-- #region Url -->
+@*
+         /Controller/Action/Param1Value/Param2Value
+         -------------------------------------------------
+             @Html.ActionLink(
+             linkText,
+             actionName,
+             controllerName,
+             routeValues: new {
+                 Param1Name= Param1Value,
+                 Param2Name = Param2Value
+             },
+             htmlAttributes: null
+         )
+
+         ----------------------------------------------
+        -----------------------------------------------
+
+         /Controller/Action/Param1Value?Param2Name=Param2Value
+        -----------------------------------------------------------
+        @Html.ActionLink(
+        linkText,
+        actionName,
+        controllerName,
+        routeValues: new {
+            Param1Name= "Param1Value / Param2Value" ,
+        },
+        htmlAttributes: null
+    )
+
+
+
+
+
+*@
+<!-- #endregion -->
+
+
+<table class="table table-bordered table-hover">
+    <thead class="table-active">
+        <tr>
+            <td>Customer</td>
+            <td>MemberShip</td>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var customer in Model)
+        {
+
+            <tr>
+                <td>@Html.ActionLink(customer.Name, "Details", "Customer", routeValues: new { id = customer.Id }, htmlAttributes: new { @class = "active" })</td>
+                <td>@customer.MemberShipType.Name</td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+

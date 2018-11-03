@@ -1,0 +1,15 @@
+﻿@model VideoRentalAPP.Models.Customer
+
+@{
+    ViewBag.Title = Model.Name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Customer Details</h2>
+<h4><b>Name</b> : @Model.Name</h4>
+<h4><b>MemberShip</b> : @Model.MemberShipType.Name</h4>
+<h4><b>Subscribe</b> : @Model.IsSubscribedToNewsLetter</h4>
+@if (Model.BirthDate != null)
+{
+    <h4><b>Birthdate</b> : @Model.BirthDate</h4>
+}
