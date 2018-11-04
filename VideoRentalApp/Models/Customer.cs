@@ -20,6 +20,7 @@ namespace VideoRentalAPP.Models
         public bool IsSubscribedToNewsLetter { get; set; }
 
         public MemberShipType MemberShipType { get; set; }
-        [Required] public byte MemberShipTypeId { get; set; }
+        [Required]
+        public byte MemberShipTypeId { get; set; }
     }
 }

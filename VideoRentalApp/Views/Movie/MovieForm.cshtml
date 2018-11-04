@@ -1,0 +1,95 @@
+﻿@model VideoRentalAPP.ViewModels.MovieFormViewModel
+
+@{
+    ViewBag.Title = Model.Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create New Customer</h2>
+
+@using (Html.BeginForm("Save", "Movie", FormMethod.Post, new { id = "CreateMovieForm", @class = "form-horizontal" }))
+{
+    <div class="form-group">
+
+        <label for="Movie_Name" class="col-4">Movie Name</label>
+
+        <div class="input-group col-4">
+            @Html.TextBoxFor(x => x.Movie.Name, new { @class = "form-control", placeholder = "Enter Name" })
+            @Html.ValidationMessageFor(x => x.Movie.Name, null, new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="Movie_ReleaseDate" class="col-4">Release Date</label>
+
+        <div class="input-group col-4">
+            @Html.TextBoxFor(x => x.Movie.ReleaseDate, null, new { @class = "form-control datetimepicker-input", placeholder = "Enter Date", data_toggle = "datetimepicker", data_target = "#Movie_ReleaseDate", autocomplete = "off" })
+            @Html.ValidationMessageFor(x => x.Movie.ReleaseDate, null, new { @class = "text-danger" })
+
+            <script type="text/javascript">
+                $(function() {
+                    $('#Movie_ReleaseDate').datetimepicke();
+                });
+            </script>
+        </div>
+    </div>
+
+    <div class="form-group">
+
+        <label for="Movie_GenreId" class="col-4">Genre</label>
+
+        <div class="input-group col-4">
+            @Html.DropDownListFor(x => x.Movie.GenreId, new SelectList(Model.Genres, "Id", "Name"), "---SELECT----", new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Movie.GenreId, null, new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+
+        <label for="Movie_NumberInStock" class="col-4">Number of Stock</label>
+
+        <div class="input-group col-4">
+            @Html.TextBoxFor(x => x.Movie.NumberInStock, new { @class = "form-control", placeholder = "Enter Number of Stock" })
+            @Html.ValidationMessageFor(x => x.Movie.NumberInStock, null, new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    @Html.HiddenFor(c => c.Movie.Id);
+
+    <div class="form-group col-4">
+        <button type="submit" class="btn btn-success">Save</button>
+    </div>
+
+    if (ViewBag.Message != null)
+    {
+        <div class="form-group col-4">
+            <label class="form-group input-group alert alert-info">@ViewBag.Message</label>
+            <br />
+        </div>
+
+    }
+
+
+}
+
+
+
+@*     <div class="form-check"> *@
+@*         <input type="checkbox" class="form-check-input" id="exampleCheck1"> *@
+@*         <label class="form-check-label" for="exampleCheck1">Check me out</label> *@
+@*     </div> *@
+
+
+@* <div class="container"> *@
+@*     <div class="row"> *@
+@*         <div class="col-sm-6"> *@
+@*             <input type="text" class="form-control datetimepicker-input" id="datetimepicker5" data-toggle="datetimepicker" data-target="#datetimepicker5" /> *@
+@*         </div> *@
+@*         <script type="text/javascript"> *@
+@*             $(function () { *@
+@*                 $('#datetimepicker5').datetimepicker(); *@
+@*             }); *@
+@*         </script> *@
+@*     </div> *@
+@* </div> *@

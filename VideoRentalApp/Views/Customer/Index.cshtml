@@ -8,7 +8,6 @@
 }
 
 @{
-  
 }
 
 <!-- #region Url -->
@@ -48,28 +47,36 @@
 *@
 <!-- #endregion -->
 
+<div class="container">
 
-<table class="table table-bordered table-hover">
-    <thead class="table-active">
+    <br/>
+    <button class="btn btn-info">@Html.ActionLink("New Customer", "Save", "Customer")</button>
+    <hr/>
+
+    <h2>Customer List</h2>
+    <hr/>
+    <table class="table table-bordered table-hover">
+        <thead class="table-active bg-info">
         <tr>
-            <td>Customer</td>
-            <td>MemberShip</td>
-            <td>Action</td>
+            <td><b>Customer</b></td>
+            <td><b>MemberShip</b></td>
+            <td><b>Action</b></td>
         </tr>
-    </thead>
-    <tbody>
+        </thead>
+        <tbody>
 
         @foreach (var customer in Model)
         {
-
             <tr>
-                <td>@Html.ActionLink(customer.Name, "Details", "Customer", routeValues: new { id = customer.Id }, htmlAttributes: new { @class = "active" })</td>
+                <td>@Html.ActionLink(customer.Name, "Details", "Customer", routeValues: new {id = customer.Id}, htmlAttributes: new {@class = "active"})</td>
                 <td>@customer.MemberShipType.Name</td>
-                <td><button class="btn btn-info">@Html.ActionLink("Edit", "Edit", "Customer", routeValues: new { id = customer.Id }, htmlAttributes: new { @class = "active" })</button></td>
+                <td>
+                    <button class="btn btn-info">@Html.ActionLink("Edit", "Edit", "Customer", routeValues: new {id = customer.Id}, htmlAttributes: new {@class = "active"})</button>
+                </td>
             </tr>
         }
 
-    </tbody>
-</table>
+        </tbody>
+    </table>
 
-
+</div>

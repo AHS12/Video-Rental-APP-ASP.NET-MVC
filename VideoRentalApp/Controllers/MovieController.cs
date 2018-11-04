@@ -5,19 +5,56 @@ using System.Web;
 using System.Web.Mvc;
 using VideoRentalApp.Managers;
 using VideoRentalAPP.Models;
-using VideoRentalAPP.Models.ViewModels;
+using VideoRentalApp.ViewModels;
+using VideoRentalAPP.ViewModels;
 
 namespace VideoRentalAPP.Controllers
 {
     public class MovieController : Controller
     {
-
         private MovieManager aMovieManager;
 
         public MovieController()
         {
             aMovieManager = new MovieManager();
         }
+
+        [HttpGet]
+        public ActionResult Save()
+        {
+            var viewModel = new MovieFormViewModel()
+            {
+                Genres = aMovieManager.GetAllGenres()
+            };
+            return View("MovieForm", viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Save(MovieFormViewModel viewModel)
+        {
+            ViewBag.Message = aMovieManager.Save(viewModel.Movie);
+
+            viewModel.Genres = aMovieManager.GetAllGenres();
+            return View("MovieForm", viewModel);
+        }
+
+        public ActionResult Edit(int id)
+        {
+            var movie = aMovieManager.GerMovieById(id);
+            if (movie == null)
+            {
+                return HttpNotFound();
+            }
+
+            var viewModel = new MovieFormViewModel()
+            {
+                Movie = movie,
+                Genres = aMovieManager.GetAllGenres()
+            };
+            return View("MovieForm", viewModel);
+        }
+
+
         // GET: Movies
         public ActionResult Index()
         {
@@ -32,37 +69,8 @@ namespace VideoRentalAPP.Controllers
             {
                 return HttpNotFound();
             }
+
             return View(movie);
         }
-
-
-//        public ActionResult Random()
-//        {
-//            Movie aMovie2 = new Movie()
-//            {
-//                Id = 2,
-//                Name = "Zootopia"
-//            };
-//
-//            var Customers = new List<Customer>()
-//            {
-//                new Customer(){Name = "Customer 1"},
-//                new Customer(){Name = "Customer 2"}
-//            };
-////            ViewBag.RandMovie = aMovie2;
-//
-//            var viewModel = new RandomMovieViewModel()
-//            {
-//                Movie = aMovie2,
-//                Customers = Customers
-//            };
-//            return View(viewModel);
-//        }
-
-//        [Route("movie/released/{year}/{month}")]
-//        public ActionResult Release(int year, int month)
-//        {
-//            return Content(year + " " + month);
-//        }
     }
 }
