@@ -1,9 +1,14 @@
-﻿@model dynamic
+﻿@model VideoRentalAPP.Models.Movie
 
 @{
-    ViewBag.Title = "title";
+    ViewBag.Title = Model.Name;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>title</h2>
+<h2>Movie Description</h2>
+<h4><b>Name</b> : @Model.Name</h4>
+<h4><b>Genre</b> : @Model.Genre.Name</h4>
+<h4><b>Release Date</b> : @Model.ReleaseDate.ToLongDateString()</h4>
+<h4><b>Date Added</b> : @Model.DateAdded.Date.ToLongDateString()</h4>
+<h4><b>Stock Quantity</b> : @Model.NumberInStock</h4>
 

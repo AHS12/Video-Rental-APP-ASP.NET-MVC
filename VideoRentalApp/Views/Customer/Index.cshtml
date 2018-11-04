@@ -7,6 +7,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@{
+  
+}
 
 <!-- #region Url -->
 @*
@@ -51,6 +54,7 @@
         <tr>
             <td>Customer</td>
             <td>MemberShip</td>
+            <td>Action</td>
         </tr>
     </thead>
     <tbody>
@@ -61,6 +65,7 @@
             <tr>
                 <td>@Html.ActionLink(customer.Name, "Details", "Customer", routeValues: new { id = customer.Id }, htmlAttributes: new { @class = "active" })</td>
                 <td>@customer.MemberShipType.Name</td>
+                <td><button class="btn btn-info">@Html.ActionLink("Edit", "Edit", "Customer", routeValues: new { id = customer.Id }, htmlAttributes: new { @class = "active" })</button></td>
             </tr>
         }
 

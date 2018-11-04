@@ -1,0 +1,93 @@
+﻿@model VideoRentalApp.ViewModels.CustomerFormViewModel
+
+@{
+    ViewBag.Title = "Save";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create New Customer</h2>
+
+@using (Html.BeginForm("Save", "Customer", FormMethod.Post, new {id = "CreateCustomerForm", @class = "form-horizontal"}))
+{
+    <div class="form-group">
+
+        <label for="Customer_Name" class="col-4">Customer Name</label>
+
+        <div class="input-group col-4">
+            @Html.TextBoxFor(x => x.Customer.Name, new {@class = "form-control", placeholder = "Enter Name"})
+            @Html.ValidationMessageFor(x => x.Customer.Name, null, new {@class = "text-danger"})
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="Customer_BirthDate" class="col-4">Birth Date</label>
+
+        <div class="input-group col-4">
+            @Html.TextBoxFor(x => x.Customer.BirthDate,null, new {@class = "form-control datetimepicker-input", placeholder = "Enter Date", data_toggle = "datetimepicker", data_target = "#Customer_BirthDate",autocomplete="off"})
+            @Html.ValidationMessageFor(x => x.Customer.BirthDate, null, new {@class = "text-danger"})
+
+            <script type="text/javascript">
+                $(function() {
+                    $('#Customer_BirthDate').datetimepicke();
+                });
+            </script>
+        </div>
+    </div>
+
+    <div class="form-group">
+
+        <label for="Customer_MemberShipTypeId" class="col-4">MemberShip Type</label>
+
+        <div class="input-group col-4">
+            @Html.DropDownListFor(x => x.Customer.MemberShipTypeId, new SelectList(Model.MemberShipTypes, "Id", "Name"), "---SELECT----", new {@class = "form-control"})
+            @Html.ValidationMessageFor(x => x.Customer.MemberShipTypeId, null, new {@class = "text-danger"})
+        </div>
+    </div>
+
+
+    <div class="form-group col-4">
+        <div class="form-check">
+
+            @Html.CheckBoxFor(x => x.Customer.IsSubscribedToNewsLetter, new {@class = "form-check-input"})
+            <label for="Customer_IsSubscribedToNewsLetter" class="form-check-label">Subscribe To NewsLetter</label>
+        </div>
+    </div>
+
+    @Html.HiddenFor(c=>c.Customer.Id);
+
+    <div class="form-group col-4">
+        <button type="submit" class="btn btn-success">Save</button>
+    </div>
+
+    if (ViewBag.Message != null)
+    {
+        <div class="form-group col-4">
+            <label class="form-group input-group alert alert-info">@ViewBag.Message</label>
+            <br />
+        </div>
+
+    }
+
+ 
+}
+
+
+
+@*     <div class="form-check"> *@
+@*         <input type="checkbox" class="form-check-input" id="exampleCheck1"> *@
+@*         <label class="form-check-label" for="exampleCheck1">Check me out</label> *@
+@*     </div> *@
+
+
+@* <div class="container"> *@
+@*     <div class="row"> *@
+@*         <div class="col-sm-6"> *@
+@*             <input type="text" class="form-control datetimepicker-input" id="datetimepicker5" data-toggle="datetimepicker" data-target="#datetimepicker5" /> *@
+@*         </div> *@
+@*         <script type="text/javascript"> *@
+@*             $(function () { *@
+@*                 $('#datetimepicker5').datetimepicker(); *@
+@*             }); *@
+@*         </script> *@
+@*     </div> *@
+@* </div> *@

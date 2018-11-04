@@ -27,7 +27,12 @@ namespace VideoRentalAPP.Controllers
 
         public ActionResult Details(int id)
         {
-            return View();
+            var movie = aMovieManager.GetMovieDetailsById(id);
+            if (movie == null)
+            {
+                return HttpNotFound();
+            }
+            return View(movie);
         }
 
 

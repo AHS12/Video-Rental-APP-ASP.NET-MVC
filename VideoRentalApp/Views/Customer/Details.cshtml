@@ -11,5 +11,5 @@
 <h4><b>Subscribe</b> : @Model.IsSubscribedToNewsLetter</h4>
 @if (Model.BirthDate != null)
 {
-    <h4><b>Birthdate</b> : @Model.BirthDate</h4>
+<h4><b>Birthdate</b> : @Model.BirthDate.Value.ToLongDateString()</h4>
 }

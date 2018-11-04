@@ -24,6 +24,7 @@ namespace VideoRentalApp.Models
     {
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Movie> Movies { get; set; }
+        public DbSet<MemberShipType> MemberShipTypes { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
