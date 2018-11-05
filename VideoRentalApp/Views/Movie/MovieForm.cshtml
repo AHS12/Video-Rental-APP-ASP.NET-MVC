@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create New Customer</h2>
+<h2>@Model.Title</h2>
 
 @using (Html.BeginForm("Save", "Movie", FormMethod.Post, new { id = "CreateMovieForm", @class = "form-horizontal" }))
 {
@@ -14,21 +14,40 @@
         <label for="Movie_Name" class="col-4">Movie Name</label>
 
         <div class="input-group col-4">
-            @Html.TextBoxFor(x => x.Movie.Name, new { @class = "form-control", placeholder = "Enter Name" })
-            @Html.ValidationMessageFor(x => x.Movie.Name, null, new { @class = "text-danger" })
+            <div class="input-group">
+                @Html.TextBoxFor(x => x.Name, new { @class = "form-control", placeholder = "Enter Name" })
+            </div>
+            <div class="input-group">
+                @Html.ValidationMessageFor(x => x.Name, null, new { @class = "text-danger" })
+            </div>
+
+
         </div>
     </div>
 
     <div class="form-group">
-        <label for="Movie_ReleaseDate" class="col-4">Release Date</label>
+        <label for="ReleaseDate" class="col-4">Release Date</label>
 
         <div class="input-group col-4">
-            @Html.TextBoxFor(x => x.Movie.ReleaseDate, null, new { @class = "form-control datetimepicker-input", placeholder = "Enter Date", data_toggle = "datetimepicker", data_target = "#Movie_ReleaseDate", autocomplete = "off" })
-            @Html.ValidationMessageFor(x => x.Movie.ReleaseDate, null, new { @class = "text-danger" })
+            <div class="input-group">
+                @Html.TextBoxFor(x => x.ReleaseDate, null,
+                    new
+                    {
+                        @class = "form-control datetimepicker-input",
+                        placeholder = "Enter Date",
+                        data_toggle = "datetimepicker",
+                        data_target = "#ReleaseDate",
+                        autocomplete = "off"
+                    })
+            </div>
+            <div class="input-group">
+                @Html.ValidationMessageFor(x => x.ReleaseDate, null, new { @class = "text-danger" })
+            </div>
+
 
             <script type="text/javascript">
-                $(function() {
-                    $('#Movie_ReleaseDate').datetimepicke();
+                $(function () {
+                    $('#ReleaseDate').datetimepicke();
                 });
             </script>
         </div>
@@ -39,8 +58,16 @@
         <label for="Movie_GenreId" class="col-4">Genre</label>
 
         <div class="input-group col-4">
-            @Html.DropDownListFor(x => x.Movie.GenreId, new SelectList(Model.Genres, "Id", "Name"), "---SELECT----", new { @class = "form-control" })
-            @Html.ValidationMessageFor(x => x.Movie.GenreId, null, new { @class = "text-danger" })
+            <div class="input-group">
+                @Html.DropDownListFor(x => x.GenreId,
+                    new SelectList(Model.Genres, "Id", "Name"), "---SELECT----",
+                    new {@class = "form-control"})
+            </div>
+            <div class="input-group">
+                @Html.ValidationMessageFor(x => x.GenreId, null, new { @class = "text-danger" })
+            </div>
+
+
         </div>
     </div>
 
@@ -49,13 +76,20 @@
         <label for="Movie_NumberInStock" class="col-4">Number of Stock</label>
 
         <div class="input-group col-4">
-            @Html.TextBoxFor(x => x.Movie.NumberInStock, new { @class = "form-control", placeholder = "Enter Number of Stock" })
-            @Html.ValidationMessageFor(x => x.Movie.NumberInStock, null, new { @class = "text-danger" })
+            <div class="input-group">
+                @Html.TextBoxFor(x => x.NumberInStock, new { @class = "form-control", placeholder = "Enter Number of Stock" })
+            </div>
+            <div class="input-group">
+                @Html.ValidationMessageFor(x => x.NumberInStock, null, new { @class = "text-danger" })
+            </div>
+
+
         </div>
     </div>
 
 
-    @Html.HiddenFor(c => c.Movie.Id);
+    @Html.HiddenFor(c => c.Id);
+    @Html.AntiForgeryToken()
 
     <div class="form-group col-4">
         <button type="submit" class="btn btn-success">Save</button>
@@ -67,10 +101,11 @@
             <label class="form-group input-group alert alert-info">@ViewBag.Message</label>
             <br />
         </div>
-
     }
-
-
+}
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
 }
 
 

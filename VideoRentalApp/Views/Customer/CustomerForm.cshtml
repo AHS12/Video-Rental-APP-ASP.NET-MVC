@@ -1,11 +1,12 @@
 ﻿@model VideoRentalApp.ViewModels.CustomerFormViewModel
 
 @{
-    ViewBag.Title = "Save";
+    ViewBag.Title = Model.Title;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create New Customer</h2>
+<h2>@Model.Title</h2>
+@Html.ValidationSummary()
 
 @using (Html.BeginForm("Save", "Customer", FormMethod.Post, new {id = "CreateCustomerForm", @class = "form-horizontal"}))
 {
@@ -14,8 +15,14 @@
         <label for="Customer_Name" class="col-4">Customer Name</label>
 
         <div class="input-group col-4">
-            @Html.TextBoxFor(x => x.Customer.Name, new {@class = "form-control", placeholder = "Enter Name"})
-            @Html.ValidationMessageFor(x => x.Customer.Name, null, new {@class = "text-danger"})
+            <div class="input-group">
+                @Html.TextBoxFor(x => x.Customer.Name, new {@class = "form-control", placeholder = "Enter Name"})
+            </div>
+
+            <div class="input-group">
+                @Html.ValidationMessageFor(x => x.Customer.Name, null, new {@class = "text-danger"})
+            </div>
+
         </div>
     </div>
 
@@ -23,8 +30,23 @@
         <label for="Customer_BirthDate" class="col-4">Birth Date</label>
 
         <div class="input-group col-4">
-            @Html.TextBoxFor(x => x.Customer.BirthDate,null, new {@class = "form-control datetimepicker-input", placeholder = "Enter Date", data_toggle = "datetimepicker", data_target = "#Customer_BirthDate",autocomplete="off"})
-            @Html.ValidationMessageFor(x => x.Customer.BirthDate, null, new {@class = "text-danger"})
+            <div class="input-group">
+                @Html.TextBoxFor(x => x.Customer.BirthDate, null,
+                    new
+                    {
+                        @class = "form-control datetimepicker-input",
+                        placeholder = "Enter Date",
+                        data_toggle = "datetimepicker",
+                        data_target = "#Customer_BirthDate",
+                        autocomplete = "off"
+                    })
+            </div>
+
+            <br/>
+            <div class="input-group">
+                @Html.ValidationMessageFor(x => x.Customer.BirthDate, null, new {@class = "text-danger"})
+            </div>
+
 
             <script type="text/javascript">
                 $(function() {
@@ -36,11 +58,19 @@
 
     <div class="form-group">
 
-        <label for="Customer_MemberShipTypeId" class="col-4">MemberShip Type</label>
+        <label for="Customer_MemberShipTypeId" class="col-4">MemberShip</label>
 
         <div class="input-group col-4">
-            @Html.DropDownListFor(x => x.Customer.MemberShipTypeId, new SelectList(Model.MemberShipTypes, "Id", "Name"), "---SELECT----", new {@class = "form-control"})
-            @Html.ValidationMessageFor(x => x.Customer.MemberShipTypeId, null, new {@class = "text-danger"})
+            <div class="input-group">
+                @Html.DropDownListFor(x => x.Customer.MemberShipTypeId,
+                    new SelectList(Model.MemberShipTypes, "Id", "Name"), "---SELECT----",
+                    new {@class = "form-control"})
+            </div>
+
+            <div class="input-group">
+                @Html.ValidationMessageFor(x => x.Customer.MemberShipTypeId, null, new {@class = "text-danger"})
+            </div>
+
         </div>
     </div>
 
@@ -53,7 +83,8 @@
         </div>
     </div>
 
-    @Html.HiddenFor(c=>c.Customer.Id);
+    @Html.HiddenFor(c => c.Customer.Id);
+    @Html.AntiForgeryToken();
 
     <div class="form-group col-4">
         <button type="submit" class="btn btn-success">Save</button>
@@ -63,12 +94,14 @@
     {
         <div class="form-group col-4">
             <label class="form-group input-group alert alert-info">@ViewBag.Message</label>
-            <br />
+            <br/>
         </div>
-
     }
 
- 
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
 }
 
 

@@ -15,20 +15,21 @@
    
 </head>
 <body>
-@Html.Partial("_NavBar")
+    @Html.Partial("_NavBar")
 
 
     <br />
-<div class="container body-content">
-    @RenderBody()
-    <hr/>
-    <footer>
-        <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-    </footer>
-</div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
 
 
-@Scripts.Render("~/bundles/bootstrap")
-@RenderSection("scripts", required: false)
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    @* <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script> *@
 </body>
 </html>

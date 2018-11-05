@@ -11,16 +11,18 @@ namespace VideoRentalAPP.Models
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Provide Name!")]
+        [Required(ErrorMessage = "Please Provide Name!")]
         [StringLength(255)]
         public string Name { get; set; }
+        //Note: BusinessLogic: Customer must be 18 year or older for other membership type ratherThen PayAsYouGo
         [DataType(DataType.Date)]
+        [Min18YearValidation]
         public DateTime? BirthDate { get; set; }
 
         public bool IsSubscribedToNewsLetter { get; set; }
 
         public MemberShipType MemberShipType { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Please Select a Membership Type")]
         public byte MemberShipTypeId { get; set; }
     }
 }

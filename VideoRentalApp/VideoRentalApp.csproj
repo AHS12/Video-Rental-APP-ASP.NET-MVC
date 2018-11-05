@@ -265,6 +265,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MemberShipType.cs" />
+    <Compile Include="Models\Min18YearValidation.cs" />
     <Compile Include="Models\Movie.cs" />
     <Compile Include="ViewModels\CustomerFormViewModel.cs" />
     <Compile Include="ViewModels\MovieFromViewModel.cs" />
