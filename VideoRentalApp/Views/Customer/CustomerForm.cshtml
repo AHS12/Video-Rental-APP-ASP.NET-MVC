@@ -6,7 +6,7 @@
 }
 
 <h2>@Model.Title</h2>
-@Html.ValidationSummary()
+@* @Html.ValidationSummary() *@
 
 @using (Html.BeginForm("Save", "Customer", FormMethod.Post, new {id = "CreateCustomerForm", @class = "form-horizontal"}))
 {

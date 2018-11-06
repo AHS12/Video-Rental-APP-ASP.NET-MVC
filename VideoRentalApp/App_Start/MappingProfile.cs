@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using AutoMapper;
 using VideoRentalApp.Dtos;
+using VideoRentalApp.Migrations;
+using VideoRentalApp.Models;
 using VideoRentalAPP.Models;
 
 namespace VideoRentalApp.App_Start
@@ -14,6 +16,7 @@ namespace VideoRentalApp.App_Start
         {
             Mapper.CreateMap<Customer, CustomerDto>();
             Mapper.CreateMap<Movie, MovieDto>();
+            Mapper.CreateMap<MemberShipType, MemberShipTypeDto>();
 
             // Dto to Domain
             Mapper.CreateMap<CustomerDto, Customer>()

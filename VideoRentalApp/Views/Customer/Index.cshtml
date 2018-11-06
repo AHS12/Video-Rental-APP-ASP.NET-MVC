@@ -1,14 +1,13 @@
-﻿@using System.Web.UI.WebControls
+﻿@using System.Collections.Specialized
+@using System.Web.UI.WebControls
 @using VideoRentalAPP.Models
-@model IEnumerable<VideoRentalAPP.Models.Customer>
+@* @model IEnumerable<VideoRentalAPP.Models.Customer> *@
 
 @{
     ViewBag.Title = "Customers";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@{
-}
 
 <!-- #region Url -->
 @*
@@ -50,33 +49,108 @@
 <div class="container">
 
     <br/>
-    <button class="btn btn-info">@Html.ActionLink("New Customer", "New", "Customer")</button>
+    <button class="btn btn-outline-info">@Html.ActionLink("New Customer", "New", "Customer")</button>
     <hr/>
 
     <h2>Customer List</h2>
     <hr/>
-    <table class="table table-bordered table-hover">
+    <table id="customers" class="table table-bordered table-hover">
         <thead class="table-active bg-info">
         <tr>
-            <td><b>Customer</b></td>
-            <td><b>MemberShip</b></td>
-            <td><b>Action</b></td>
+            <td>
+                <b>Customer</b>
+            </td>
+            <td>
+                <b>MemberShip</b>
+            </td>
+            <td>
+                <b>Action</b>
+            </td>
+
+
         </tr>
         </thead>
         <tbody>
+        @* Dont Need to loop Cuz Rendering it in AJAX *@
 
-        @foreach (var customer in Model)
-        {
-            <tr>
-                <td>@Html.ActionLink(customer.Name, "Details", "Customer", routeValues: new {id = customer.Id}, htmlAttributes: new {@class = "active"})</td>
-                <td>@customer.MemberShipType.Name</td>
-                <td>
-                    <button class="btn btn-info">@Html.ActionLink("Edit", "Edit", "Customer", routeValues: new {id = customer.Id}, htmlAttributes: new {@class = "active"})</button>
-                </td>
-            </tr>
-        }
+        @*         @foreach (var customer in Model) *@
+        @*         { *@
+        @*             <tr> *@
+        @*                 <td>@Html.ActionLink(customer.Name, "Details", "Customer", routeValues: new {id = customer.Id}, htmlAttributes: new {@class = "active"})</td> *@
+        @*                 <td>@customer.MemberShipType.Name</td> *@
+        @*                 <td> *@
+        @*                     <button class="btn  btn-info">@Html.ActionLink("Edit", "Edit", "Customer", routeValues: new {id = customer.Id}, htmlAttributes: new {@class = "active"})</button> *@
+        @*                     <button class=" btn btn-danger js-delete" data-customer-id="@customer.Id">Delete</button> *@
+        @*                 </td> *@
+        @*             </tr> *@
+        @*         } *@
+
+
 
         </tbody>
     </table>
 
 </div>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function() {
+            //NOT Good..Comes with a lot of cost :( so gonna use the api
+//            $("#customers").DataTable();
+
+            //Rendering Our Table With API
+            //Providing Configuration for rendering Data
+            var dataTable = $("#customers").DataTable({
+                ajax: {
+                    url: "/Api/Customers",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "name",
+                        render: function(data, type, customer) {
+                            return "<a href='/Customer/Details/" + customer.id + "'>" + customer.name + "</a>";
+                        }
+                    },
+                    {
+                        data: "memberShipType.name"
+                    },
+                    {
+                        data: "id",
+
+                        render: function(data) {
+                            return "<a class = 'btn btn-primary' href='/Customer/edit/" +data +"'>EDIT</a>" +
+                                "   " +
+                                "<button class='btn btn-danger js-delete' data-customer-id=" +data +">Delete</button>";;
+                        }
+                    }
+                ]
+            });
+            //Delete Function
+            $("#customers").on("click",
+                ".js-delete", //filter
+                function() {
+
+                    var button = $(this);
+                    bootbox.confirm("Are You Sure You Want To Delete This Customer?",
+                        function(result) {
+                            if (result) {
+                                $.ajax({
+                                    url: "/api/customers/" + button.attr("data-customer-id"),
+                                    method: "DELETE",
+                                    success: function() {
+                                        // console.log("Success!");
+                                        //Datatable Buggged so cant use this
+                                        //button.parents("tr").remove();
+                                        dataTable.row(button.parents("tr")).remove().draw();
+                                    }
+                                });
+                            }
+                        });
+
+
+                });
+        })
+    </script>
+}

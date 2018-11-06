@@ -29,10 +29,11 @@ namespace VideoRentalApp.Controllers
 
 
         // GET: Customer
-        public ActionResult Index()
+        public ViewResult Index()
         {
-            var Customers = _context.Customers.Include(c => c.MemberShipType).ToList();
-            return View(Customers);
+            //No Need to Pass model CUZ providing it With API
+           // var Customers = _context.Customers.Include(c => c.MemberShipType).ToList();
+            return View();
         }
 
         public ActionResult Details(int id)

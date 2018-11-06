@@ -19,6 +19,8 @@ namespace VideoRentalApp.Dtos
        // [Min18YearValidation]
         public DateTime? BirthDate { get; set; }
 
+        public MemberShipTypeDto MemberShipType{ get; set; }
+
         public bool IsSubscribedToNewsLetter { get; set; }
         public byte MemberShipTypeId { get; set; }
     }
