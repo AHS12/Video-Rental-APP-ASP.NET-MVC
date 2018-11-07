@@ -12,7 +12,7 @@
     @* @Scripts.Render("~/bundles/bootstrap") *@
     
     @* Lib *@
-    @Scripts.Render("~/bundles/lib")
+    @Scripts.Render("~/bundles/jquery")
     
 
     <link type="text/css" href="~/Content/tempusdominus-bootstrap-4.min.css" rel="stylesheet"/>
@@ -34,7 +34,7 @@
     </footer>
 </div>
 
-
+@Scripts.Render("~/bundles/lib")
 @RenderSection("scripts", required: false)
 @* <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script> *@
 </body>
