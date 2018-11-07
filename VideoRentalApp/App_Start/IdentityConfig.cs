@@ -54,7 +54,8 @@ namespace VideoRentalApp
             manager.PasswordValidator = new PasswordValidator
             {
                 RequiredLength = 6,
-                RequireNonLetterOrDigit = true,
+                //Had to set it to false for the stupid fucking error: Passwords must have at least one non letter or digit character
+                RequireNonLetterOrDigit = false,
                 RequireDigit = true,
                 RequireLowercase = true,
                 RequireUppercase = true,

@@ -54,15 +54,15 @@ namespace VideoRentalApp
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "522194124913144",
+               appSecret: "4974e0297ab65ccd31ff4253d59cdc1d");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "331958768657-lo0or0q59e1prflp8ilft20legt5ds97.apps.googleusercontent.com",
+                ClientSecret = "up69Rz9vh2vHCyntOEf4uxMH"
+            });
         }
     }
 }

@@ -8,6 +8,9 @@ namespace VideoRentalApp.Models
         [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
+
+        public string HomeTown { get; set; }
+        public System.DateTime? BirthDate { get; set; }
     }
 
     public class ExternalLoginListViewModel
@@ -64,6 +67,9 @@ namespace VideoRentalApp.Models
 
     public class RegisterViewModel
     {
+
+        public string HomeTown { get; set; }
+        public System.DateTime? BirthDate { get; set; }
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]

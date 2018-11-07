@@ -26,6 +26,7 @@ namespace VideoRentalAPP.Controllers
             _context.Dispose();
         }
 
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public ActionResult New()
         {
             var viewModel = new MovieFormViewModel()
@@ -72,6 +73,7 @@ namespace VideoRentalAPP.Controllers
             return RedirectToAction("Index", "Movie");
         }
 
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public ActionResult Edit(int id)
         {
             var movie = _context.Movies.Find(id);
@@ -98,9 +100,15 @@ namespace VideoRentalAPP.Controllers
         public ViewResult Index()
         {
             // var movies = _context.Movies.Include(m => m.Genre).ToList();
-            return View();
+            if (User.IsInRole(RoleName.CanManageMovies))
+            {
+                return View("Index");
+            }
+
+            return View("ReadOnlyIndex");
         }
 
+//        [Authorize(Roles = RoleName.CanManageMovies)]
         public ActionResult Details(int id)
         {
             var movie = _context.Movies.Include(m => m.Genre).SingleOrDefault(m => m.Id == id);

@@ -19,7 +19,7 @@
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort />
+    <IISExpressSSLPort>44320</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -276,6 +276,14 @@
     <Compile Include="Migrations\201811041643501_justcheck.Designer.cs">
       <DependentUpon>201811041643501_justcheck.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811070629546_seedUsers.cs" />
+    <Compile Include="Migrations\201811070629546_seedUsers.Designer.cs">
+      <DependentUpon>201811070629546_seedUsers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811071443537_AddedPopertiesToUsersForExternalLogin.cs" />
+    <Compile Include="Migrations\201811071443537_AddedPopertiesToUsersForExternalLogin.Designer.cs">
+      <DependentUpon>201811071443537_AddedPopertiesToUsersForExternalLogin.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -287,6 +295,7 @@
     <Compile Include="Models\MemberShipType.cs" />
     <Compile Include="Models\Min18YearValidation.cs" />
     <Compile Include="Models\Movie.cs" />
+    <Compile Include="Models\RoleName.cs" />
     <Compile Include="ViewModels\CustomerFormViewModel.cs" />
     <Compile Include="ViewModels\MovieFromViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -641,6 +650,7 @@
     <Content Include="Views\Customer\Details.cshtml" />
     <Content Include="Views\Movie\Details.cshtml" />
     <Content Include="Views\Customer\CustomerForm.cshtml" />
+    <Content Include="Views\Movie\ReadOnlyIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -699,6 +709,12 @@
     <EmbeddedResource Include="Migrations\201811041643501_justcheck.resx">
       <DependentUpon>201811041643501_justcheck.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811070629546_seedUsers.resx">
+      <DependentUpon>201811070629546_seedUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811071443537_AddedPopertiesToUsersForExternalLogin.resx">
+      <DependentUpon>201811071443537_AddedPopertiesToUsersForExternalLogin.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -719,7 +735,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>19195</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:19195/</IISUrl>
+          <IISUrl>https://localhost:44320/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
