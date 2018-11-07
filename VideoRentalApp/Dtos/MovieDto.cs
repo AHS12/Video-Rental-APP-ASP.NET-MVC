@@ -22,7 +22,7 @@ namespace VideoRentalApp.Dtos
         public DateTime DateAdded { get; set; }
 
         public DateTime ReleaseDate { get; set; }
-
+        public Genre Genre { get; set; }
         [Required]
         public byte GenreId { get; set; }
     }

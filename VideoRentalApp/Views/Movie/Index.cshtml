@@ -10,33 +10,89 @@
 
 
     <br />
-    <button class="btn btn-info">@Html.ActionLink("New Movie", "New", "Movie")</button>
+    <button class="btn btn-outline-info">@Html.ActionLink("New Movie", "New", "Movie")</button>
     <hr />
 
     <h2>Movie List</h2>
     <hr />
-    <table class="table table-hover table-bordered">
+    <table id="movies" class="table table-hover table-bordered">
         <thead class="table-active bg-info">
-            <tr>
-                <th><b>Movie</b></th>
-                <th><b>Genre</b></th>
-                <th><b>Action</b></th>
-            </tr>
+        <tr>
+            <th><b>Movie</b></th>
+            <th><b>Genre</b></th>
+            <th><b>Action</b></th>
+        </tr>
         </thead>
         <tbody>
-            @foreach (var movie in Model)
-            {
-                <tr>
-                    <td>@Html.ActionLink(movie.Name, "Details", "Movie", new { id = movie.Id }, null)</td>
-                    <td>@movie.Genre.Name</td>
-                    <td>
-                        <button class="btn btn-info">@Html.ActionLink("Edit", "Edit", "Movie", routeValues: new { id = movie.Id }, htmlAttributes: new { @class = "active" })</button>
-                    </td>
-                </tr>
-            }
+        @*             @foreach (var movie in Model) *@
+        @*             { *@
+        @*                 <tr> *@
+        @*                     <td>@Html.ActionLink(movie.Name, "Details", "Movie", new { id = movie.Id }, null)</td> *@
+        @*                     <td>@movie.Genre.Name</td> *@
+        @*                     <td> *@
+        @*                         <button class="btn btn-info">@Html.ActionLink("Edit", "Edit", "Movie", routeValues: new { id = movie.Id }, htmlAttributes: new { @class = "active" })</button> *@
+        @*                     </td> *@
+        @*                 </tr> *@
+        @*             } *@
 
         </tbody>
     </table>
 
 </div>
+
+@section scripts
+{
+<script>
+        $(document).ready(function() {
+
+            var dataTable = $("#movies").DataTable({
+                ajax: {
+                    url: "/Api/Movies",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "name",
+                        render: function(data, type, movie) {
+                            return "<a href='/Movie/Details/" + movie.id + "'>" + movie.name + "</a>";
+                        }
+                    },
+                    {
+                        data: "genre.name"
+                    },
+                    {
+                        data: "id",
+
+                        render: function(data) {
+                            return "<a class = 'btn btn-primary' href='/Movie/edit/" +data +"'>EDIT</a>" +
+                                "   " +
+                                "<button class='btn btn-danger js-delete' data-movie-id=" +data +">Delete</button>";;
+                        }
+                    }
+                ]
+            });
+            //Delete Function
+            $("#movies").on("click",
+                ".js-delete", //filter
+                function() {
+
+                    var button = $(this);
+                    bootbox.confirm("Are You Sure You Want To Delete This Movie?",
+                        function(result) {
+                            if (result) {
+                                $.ajax({
+                                    url: "/api/movies/" + button.attr("data-movie-id"),
+                                    method: "DELETE",
+                                    success: function() {
+                                        dataTable.row(button.parents("tr")).remove().draw();
+                                    }
+                                });
+                            }
+                        });
+
+
+                });
+        })
+</script>
+}
 
