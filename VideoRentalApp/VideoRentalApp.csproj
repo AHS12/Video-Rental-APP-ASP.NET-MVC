@@ -237,8 +237,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Managers\CustomerManager.cs" />
-    <Compile Include="Managers\MovieManager.cs" />
     <Compile Include="Migrations\201811031350220_InitialModel.cs" />
     <Compile Include="Migrations\201811031350220_InitialModel.Designer.cs">
       <DependentUpon>201811031350220_InitialModel.cs</DependentUpon>

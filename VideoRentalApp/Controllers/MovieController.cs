@@ -4,7 +4,6 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using VideoRentalApp.Managers;
 using VideoRentalApp.Models;
 using VideoRentalAPP.Models;
 using VideoRentalApp.ViewModels;

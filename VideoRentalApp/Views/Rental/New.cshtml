@@ -133,16 +133,17 @@
                             data: vm
                         })
                         .done(function() {
-                            //changing toaster position
+                            //changing toastr position
                             toastr.optionsOverride = 'positionclass = "toast-top-center"';
                             toastr.options.positionClass = 'toast-top-center';
                             toastr.success("Rentals successfully recorded.");
 
-
+                            //Clearing form value after submit
                             $("#customer").typeahead("val", "");
                             $("#movie").typeahead("val", "");
                             $("#movies").empty();
 
+                            //Clearing VM after submit
                             vm = { movieIds: [] };
 
                             validator.resetForm();
