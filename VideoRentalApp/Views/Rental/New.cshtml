@@ -6,25 +6,30 @@
 
 <h2>Rent A Movie</h2>
 
-<form class="">
-    <div class="form-group">
-        <label>Customer</label>
-        <input id="customer" type="text" name="customers" value="" class="form-control"/>
-    </div>
-    <div class="form-group">
-        <label>Movie</label>
-        <input id="movie" type="text" name="movies" value="" class="form-control"/>
-    </div>
-    
-    <div class="form-group">
-        <ul id="movies" class="list-group"></ul>
-    </div>
+<form id="rentalForm">
+    <div class="col-md-4 col-sm-4">
 
-    <button class="btn btn-primary">Save</button>
+        <div class="form-group ">
+            <label>Customer</label>
+            <input id="customer" type="text" name="customers" value="" class="form-control" data-rule-validCustomer="true" required/>
+        </div>
+        <div class="form-group ">
+            <label>Movie</label>
+            <input id="movie" type="text" name="movies" value="" class="form-control" data-rule-atLeastOneMovie="true"/>
+        </div>
+
+        <div class="form-group ">
+            <ul id="movies" class="list-group"></ul>
+
+        </div>
+
+        <button class="btn btn-primary">Save</button>
+    </div>
 </form>
 
 @section scripts
 {
+    @Scripts.Render("~/bundles/jqueryval")
     <script>
         $(document).ready(function() {
             var vm = {
@@ -89,6 +94,66 @@
 
                     vm.movieIds.push(movie.id);
                 });
+
+            //submitting from data to api
+//            $("#rentalForm").submit(function (e) {
+//                e.prevenDefault();
+//
+//                $.ajax({
+//                    url: "/api/Rental",
+//                    method: "POST",
+//                    data: vm
+//
+//                }).done(function () {
+//                    console.log("Done");
+//                    toastr.message("Added!");
+//                }).fail(function () {
+//                    console.log("failed");
+//                    toastr.message("failed!");
+//                });
+//            });
+
+            $.validator.addMethod("validCustomer",
+                function() {
+                    return vm.customerId && vm.customerId !== 0;
+                },
+                "Please select a valid customer.");
+
+            $.validator.addMethod("atLeastOneMovie",
+                function() {
+                    return vm.movieIds.length > 0;
+                },
+                "Please select at least one movie.");
+
+            var validator = $("#rentalForm").validate({
+                submitHandler: function() {
+                    $.ajax({
+                            url: "/api/Rental",
+                            method: "post",
+                            data: vm
+                        })
+                        .done(function() {
+                            //changing toaster position
+                            toastr.optionsOverride = 'positionclass = "toast-top-center"';
+                            toastr.options.positionClass = 'toast-top-center';
+                            toastr.success("Rentals successfully recorded.");
+
+
+                            $("#customer").typeahead("val", "");
+                            $("#movie").typeahead("val", "");
+                            $("#movies").empty();
+
+                            vm = { movieIds: [] };
+
+                            validator.resetForm();
+                        })
+                        .fail(function() {
+                            toastr.error("Something unexpected happened.");
+                        });
+
+                    return false;
+                }
+            });
 
         });
 

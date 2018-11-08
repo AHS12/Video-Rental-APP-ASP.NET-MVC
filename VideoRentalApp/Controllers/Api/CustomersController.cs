@@ -21,10 +21,17 @@ namespace VideoRentalApp.Controllers.Api
         }
 
         //GET /api/customers
-        public IHttpActionResult GetCustomers()
+        public IHttpActionResult GetCustomers(string query = null) //null means its optional
         {
-            var customers = _context.Customers.
-                Include(c=>c.MemberShipType)
+            var customersQuery = _context.Customers.Include(c => c.MemberShipType);
+
+            //filtering the parameter
+            if (!string.IsNullOrWhiteSpace(query))
+            {
+                customersQuery = customersQuery.Where(c => c.Name.Contains(query));
+            }
+
+            var customers = customersQuery
                 .ToList()
                 .Select(Mapper.Map<Customer, CustomerDto>);
             return Ok(customers);
