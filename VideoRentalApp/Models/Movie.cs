@@ -20,6 +20,8 @@ namespace VideoRentalAPP.Models
         [RegularExpression("([1-9][0-9]*)", ErrorMessage = "Invalid number")]
         public int NumberInStock { get; set; }
 
+        public int NumberAvailable { get; set; }    
+
         public DateTime DateAdded { get; set; }
 
         [Required(ErrorMessage = "Provide Release Date")]

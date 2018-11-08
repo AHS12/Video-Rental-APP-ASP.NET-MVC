@@ -222,14 +222,17 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\CustomersController.cs" />
     <Compile Include="Controllers\Api\MoviesController.cs" />
+    <Compile Include="Controllers\Api\RentalController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MovieController.cs" />
+    <Compile Include="Controllers\RentalController.cs" />
     <Compile Include="Dtos\CustomerDto.cs" />
     <Compile Include="Dtos\GenreDto.cs" />
     <Compile Include="Dtos\MemberShipTypeDto.cs" />
     <Compile Include="Dtos\MovieDto.cs" />
+    <Compile Include="Dtos\RentalDto.cs" />
     <Compile Include="GlimpseSecurityPolicy.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -300,6 +303,14 @@
     <Compile Include="Migrations\201811071443537_AddedPopertiesToUsersForExternalLogin.Designer.cs">
       <DependentUpon>201811071443537_AddedPopertiesToUsersForExternalLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811080514165_AddedNumberAvailableToMovies.cs" />
+    <Compile Include="Migrations\201811080514165_AddedNumberAvailableToMovies.Designer.cs">
+      <DependentUpon>201811080514165_AddedNumberAvailableToMovies.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811080527532_AddRental.cs" />
+    <Compile Include="Migrations\201811080527532_AddRental.Designer.cs">
+      <DependentUpon>201811080527532_AddRental.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -312,6 +323,7 @@
     <Compile Include="Models\MemberShipType.cs" />
     <Compile Include="Models\Min18YearValidation.cs" />
     <Compile Include="Models\Movie.cs" />
+    <Compile Include="Models\Rental.cs" />
     <Compile Include="Models\RoleName.cs" />
     <Compile Include="ViewModels\CustomerFormViewModel.cs" />
     <Compile Include="ViewModels\MovieFromViewModel.cs" />
@@ -484,12 +496,15 @@
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
     <Content Include="Content\tempusdominus-bootstrap-4.min.css" />
+    <Content Include="Content\typeaheadB4.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Scripts\bloodhound.js" />
+    <Content Include="Scripts\bloodhound.min.js" />
     <Content Include="Scripts\bootbox.js" />
     <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -613,6 +628,10 @@
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\popper.min.js" />
     <Content Include="Scripts\tempusdominus-bootstrap-4.min.js" />
+    <Content Include="Scripts\typeahead.bundle.js" />
+    <Content Include="Scripts\typeahead.bundle.min.js" />
+    <Content Include="Scripts\typeahead.jquery.js" />
+    <Content Include="Scripts\typeahead.jquery.min.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
@@ -668,6 +687,7 @@
     <Content Include="Views\Movie\Details.cshtml" />
     <Content Include="Views\Customer\CustomerForm.cshtml" />
     <Content Include="Views\Movie\ReadOnlyIndex.cshtml" />
+    <Content Include="Views\Rental\New.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -731,6 +751,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811071443537_AddedPopertiesToUsersForExternalLogin.resx">
       <DependentUpon>201811071443537_AddedPopertiesToUsersForExternalLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811080514165_AddedNumberAvailableToMovies.resx">
+      <DependentUpon>201811080514165_AddedNumberAvailableToMovies.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811080527532_AddRental.resx">
+      <DependentUpon>201811080527532_AddRental.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
